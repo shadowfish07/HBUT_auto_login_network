@@ -6,7 +6,7 @@
 
 ## 怎么使用？
 
-1. 下载EXE程序，在同目录下创建user.txt文件，在其中加入两行文本：
+1. [下载EXE程序](https://github.com/shadowfish07/HBUT_auto_login_network/releases/download/1.0/main.exe)，在同目录下创建user.txt文件，在其中加入两行文本：
 ```
 学号@运营商
 密码
