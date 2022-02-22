@@ -1,3 +1,5 @@
+//
+//
 //@ctcc 中国电信
 //@cmcc 中国移动
 //@cucc 中国联通
@@ -47,10 +49,10 @@ func main(){
 
 func debuff(action string){
 	TimeStamp:=fmt.Sprintf("%v",time.Now().Unix())
-	url := "http://10.0.0.2/cgi-bin/get_challenge?callback=jsonp" + TimeStamp + "000&username=" + strings.Replace(user,"@","%40",-1)
+	url := "http://202.114.177.246/cgi-bin/get_challenge?callback=jsonp" + TimeStamp + "000&username=" + strings.Replace(user,"@","%40",-1)
 	res := req(url)
 	if strings.Index(res, "\"error\":\"ok\"") == -1 {
-		PrintRes(res, action, "failed")
+		PrintRes(res, action, "failed(-1)")
 	}else{
 		token := strings.Split(strings.Split(res, "lenge\":\"")[1], "\",\"cli")[0]
 		ip := strings.Split(strings.Split(res, "_ip\":\"")[1], "\",\"ecode")[0]
@@ -59,14 +61,14 @@ func debuff(action string){
 		hmd5 := encodeMD5("", token)
 		ChkSumStr:=chksum(strings.Join([]string{user, hmd5[5:], "1", ip, "200", "1", info}, token), token)
 		info=strings.Replace(strings.Replace(info,"=","%3D",-1),"/","%2F",-1)
-		url:=fmt.Sprintf("http://10.0.0.2/cgi-bin/srun_portal?callback=jsonp%v&username=%s&info=%s&chksum=%s&action=%s&ip=%s&password=%s&type=1&ac_id=1&n=200", time.Now().UnixNano()/1000000,user,info,ChkSumStr, action, ip,hmd5)
+		url:=fmt.Sprintf("http://202.114.177.246/cgi-bin/srun_portal?callback=jsonp%v&username=%s&info=%s&chksum=%s&action=%s&ip=%s&password=%s&type=1&ac_id=1&n=200", time.Now().UnixNano()/1000000,user,info,ChkSumStr, action, ip,hmd5)
 		if action=="logout"{
-			url=fmt.Sprintf("http://10.0.0.2/cgi-bin/srun_portal?callback=jsonp%v&username=%s&info=%s&chksum=%s&action=%s&ip=%s&type=1&ac_id=1&n=200", time.Now().UnixNano()/1000000,user,info,ChkSumStr, action, ip)
+			url=fmt.Sprintf("http://202.114.177.246/cgi-bin/srun_portal?callback=jsonp%v&username=%s&info=%s&chksum=%s&action=%s&ip=%s&type=1&ac_id=1&n=200", time.Now().UnixNano()/1000000,user,info,ChkSumStr, action, ip)
 		}
 		url=strings.Replace(strings.Replace(strings.Replace(strings.Replace(url,"+","%2B",-1),"@","%40",-1),"{","%7B",-1),"}","%7D",-1)
 		res = req(url)
 		if strings.Index(res, "\"error\":\"ok\"") == -1 {
-			PrintRes(res, action, "failed")
+			PrintRes(res, action, "failed(-2)")
 		}else{
 			PrintRes("IP: " + ip, action, "success")
 		}
