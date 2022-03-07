@@ -52,6 +52,10 @@ login finished!
 3. 将第一步创建的快捷方式移到打开的文件夹下
 4. Done!再也不用每次手动登录了！
 
+### 注意
+
+操作前务必先连接校园网。要实现开机自启，请设置校园网WIFI自动连接
+
 ## 鸣谢
 
 本项目Fork自：[https://github.com/Debuffxb/srun-go](https://github.com/Debuffxb/srun-go)
