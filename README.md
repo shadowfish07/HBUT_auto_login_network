@@ -6,7 +6,7 @@
 
 ## 怎么使用？
 
-1. [下载EXE程序](https://github.com/shadowfish07/HBUT_auto_login_network/releases/download/1.1/main.exe)，在同目录下创建user.txt文件，在其中加入两行文本：
+1. 克隆本项目，在项目目录下创建user.txt文件，在其中加入两行文本：
 ```
 学号@运营商
 密码
@@ -31,26 +31,27 @@
 999999
 ```
 
-2. 保存文件，打开EXE文件，若显示`login finished!`则登录成功
-```
----------------------------------
-IP地址: 10.1.177.172
----------------------------------
-logout finished!
+2. 执行`main`文件
 
----------------------------------
-IP地址: 10.1.177.172
----------------------------------
-login finished!
-
+(Linux, macOS)
+```shell
+cd /path/to/project
+chmod +x path_to_main
+./path_to_main
 ```
 
-## 进阶：开机自启
+(Windows)
+```
+运行main.exe
+```
 
-1. 右键创建EXE文件的快捷方式
-2. `win+r`打开运行窗口，输入`shell:startup`，回车
-3. 将第一步创建的快捷方式移到打开的文件夹下
-4. Done!再也不用每次手动登录了！
+3. 若显示`login success`则登录成功
+```
+2023-03-24T10:18:39 IP: 10.9.103.2
+2023-03-24T10:18:39 logout success
+2023-03-24T10:18:39 IP: 10.9.103.2
+2023-03-24T10:18:39 login success
+```
 
 ### 注意
 
