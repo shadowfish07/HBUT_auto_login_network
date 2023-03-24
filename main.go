@@ -79,7 +79,6 @@ func debuff(action string) {
 					fmt.Printf("combined out:\n%s\n", string(out))
 					log.Fatalf("cmd.Run() failed with %s\n", err)
 				}
-				fmt.Printf("combined out:\n%s\n", string(out))
 			}
 		}
 	}
