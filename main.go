@@ -18,6 +18,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -69,7 +70,17 @@ func debuff(action string) {
 		if strings.Index(res, "\"error\":\"ok\"") == -1 {
 			PrintRes(res, action, "failed(-2)")
 		} else {
+			//osascript -e 'display notification "通知内容" with title "标题" subtitle "子标题"'
 			PrintRes("IP: "+ip, action, "success")
+			if action == "login" {
+				cmd := exec.Command("osascript", "-e", "display notification \"IP: "+ip+"\" with title \"iHBUT_LOGIN\" subtitle \"Success\"")
+				out, err := cmd.CombinedOutput()
+				if err != nil {
+					fmt.Printf("combined out:\n%s\n", string(out))
+					log.Fatalf("cmd.Run() failed with %s\n", err)
+				}
+				fmt.Printf("combined out:\n%s\n", string(out))
+			}
 		}
 	}
 }
