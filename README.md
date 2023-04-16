@@ -6,57 +6,65 @@
 
 ## 怎么使用？
 
-1. 克隆本项目，在项目目录下创建user.txt文件，在其中加入两行文本：
-```
-学号@运营商
-密码
-```
+1. 下载最新Release中对应版本的可执行文件
+    ```
+    main-linux-amd64 (Linux)
+    main-macos-amd64 (macOS-Intel)
+    main-macos-arm64 (macOS-Apple)
+    main-windows-amd64.exe (Windows)
+    ```
+2. 在可执行文件同目录下创建user.txt文件，在其中加入两行文本：
+    ```
+    学号@运营商
+    密码
+    ```
+    
+    其中，运营商处按下列规则填写：
+    ```
+    校园网：连同前面的@，均不填写
+    中国移动：cmcc
+    中国电信：ctcc 
+    中国联通：cucc 
+    ```
+    
+    例如，学号100000的同学，其密码为999999，登录校园网，应写入
+    ```
+    100000
+    999999
+    ```
+    他要登录中国移动，则写入
+    ```
+    100000@cmcc
+    999999
+    ```
+3. 执行程序
 
-其中，运营商处按下列规则填写：
-```
-校园网：连同前面的@，均不填写
-中国移动：cmcc
-中国电信：ctcc 
-中国联通：cucc 
-```
-
-例如，学号100000的同学，其密码为999999，登录校园网，应写入
-```
-100000
-999999
-```
-他要登录中国移动，则写入
-```
-100000@cmcc
-999999
-```
-
-2. 执行`main`文件
-
-(Linux, macOS)
-```shell
-cd /path/to/project
-chmod +x path_to_main
-./path_to_main
-```
-
-(Windows)
-```
-运行main.exe
-```
-
-3. 若显示`login success`则登录成功
-```
-2023-03-24T10:18:39 IP: 10.9.103.2
-2023-03-24T10:18:39 logout success
-2023-03-24T10:18:39 IP: 10.9.103.2
-2023-03-24T10:18:39 login success
-```
+    (Linux, macOS)
+    ```shell
+    cd /path/to/executable_file
+    chmod +x path_to_main
+    ./path_to_main
+    ```
+    
+    (Windows)
+    ```
+    运行main-windows-amd64.exe（双击图表或命令行）
+    ```
+4. 若显示`login success`（或有通知显示）则登录成功
+   ```
+   2023-03-24T10:18:39 IP: 10.9.103.2
+   2023-03-24T10:18:39 logout success
+   2023-03-24T10:18:39 IP: 10.9.103.2
+   2023-03-24T10:18:39 login success
+   ```
 
 ### 注意
 
-操作前务必先连接校园网。要实现开机自启，请设置校园网WIFI自动连接
+- 操作前务必先连接校园网。要实现开机自启，请设置校园网WIFI自动连接
+- Linux平台桌面通知功能需要[安装对应依赖](https://command-not-found.com/notify-send)
 
 ## 鸣谢
 
-本项目Fork自：[https://github.com/Debuffxb/srun-go](https://github.com/Debuffxb/srun-go)
+本项目Fork自：
+- [https://github.com/Debuffxb/srun-go](https://github.com/Debuffxb/srun-go)
+- [https://github.com/shadowfish07/HBUT_auto_login_network](https://github.com/shadowfish07/HBUT_auto_login_network)
