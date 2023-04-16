@@ -32,7 +32,7 @@ jobs:
       run: env GOOS=darwin GOARCH=amd64 go build -o main-macos-amd64 main.go
       
     - name: Build for macOS(Apple)
-      run: env GOOS=darwin GOARCH=arm go build -o main-macos-arm main.go
+      run: env GOOS=darwin GOARCH=arm64 go build -o main-macos-arm main.go
 
     - name: Build for Windows
       run: env GOOS=windows GOARCH=amd64 go build -o main-windows-amd64.exe main-win.go
