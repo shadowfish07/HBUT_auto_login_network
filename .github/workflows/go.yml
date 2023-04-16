@@ -28,14 +28,14 @@ jobs:
     - name: Build for Linux
       run: env GOOS=linux GOARCH=amd64 go build -o main-linux-amd64 main.go
 
-#    - name: Build for macOS(Intel)
-#      run: env GOOS=darwin GOARCH=amd64 go build -o main-macos-amd64 main.go
-#
-#    - name: Build for macOS(Apple)
-#      run: env GOOS=darwin GOARCH=arm64 go build -o main-macos-arm64 main.go
-#
-#    - name: Build for Windows
-#      run: env GOOS=windows GOARCH=amd64 go build -o main-windows-amd64.exe main-win.go
+    - name: Build for macOS(Intel)
+      run: env GOOS=darwin GOARCH=amd64 go build -o main-macos-amd64 main.go
+
+    - name: Build for macOS(Apple)
+      run: env GOOS=darwin GOARCH=arm64 go build -o main-macos-arm64 main.go
+
+    - name: Build for Windows
+      run: env GOOS=windows GOARCH=amd64 go build -o main-windows-amd64.exe main-win.go
 
     - name: Determine version number
       id: version
@@ -44,7 +44,6 @@ jobs:
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
         prerelease: true
         title: Release ${{ steps.version.outputs.version }}
         files: ./main-*-*
