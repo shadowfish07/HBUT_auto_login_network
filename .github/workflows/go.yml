@@ -60,14 +60,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: |
-          main-linux-amd64
-          main-macos-amd64
-          main-macos-arm
-          main-windows-amd64.exe
+        asset_path: ｜
+          "main-linux-amd64"
+          "main-macos-amd64"
+          "main-macos-arm"
+          "main-windows-amd64.exe"
         asset_name: |
-          main-linux-amd64
-          main-macos-amd64
-          main-macos-arm
-          main-windows-amd64.exe
+          "main-linux-amd64"
+          "main-macos-amd64"
+          "main-macos-arm"
+          "main-windows-amd64.exe"
         asset_content_type: application/octet-stream
