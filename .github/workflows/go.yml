@@ -32,7 +32,7 @@ jobs:
       run: env GOOS=darwin GOARCH=amd64 go build -o main-macos-amd64 main.go
       
     - name: Build for macOS(Apple)
-      run: env GOOS=darwin GOARCH=arm64 go build -o main-macos-arm main.go
+      run: env GOOS=darwin GOARCH=arm64 go build -o main-macos-arm64 main.go
 
     - name: Build for Windows
       run: env GOOS=windows GOARCH=amd64 go build -o main-windows-amd64.exe main-win.go
@@ -60,14 +60,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ｜
-          "main-linux-amd64"
-          "main-macos-amd64"
-          "main-macos-arm"
-          "main-windows-amd64.exe"
-        asset_name: |
-          "main-linux-amd64"
-          "main-macos-amd64"
-          "main-macos-arm"
-          "main-windows-amd64.exe"
+        path: ｜
+          main-linux-amd64
+          main-macos-amd64
+          main-macos-arm64
+          main-windows-amd64.exe
         asset_content_type: application/octet-stream
