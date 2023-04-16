@@ -1,0 +1,73 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.19
+
+    - name: Install dependencies
+      run: go mod download
+
+    - name: Build for Linux
+      run: env GOOS=linux GOARCH=amd64 go build -o main-linux-amd64 main.go
+
+    - name: Build for macOS(Intel)
+      run: env GOOS=darwin GOARCH=amd64 go build -o main-macos-amd64 main.go
+      
+    - name: Build for macOS(Apple)
+      run: env GOOS=darwin GOARCH=arm go build -o main-macos-arm main.go
+
+    - name: Build for Windows
+      run: env GOOS=windows GOARCH=amd64 go build -o main-windows-amd64.exe main.go
+
+    - name: Determine version number
+      id: version
+      run: echo "::set-output name=version::$(date +'%Y%m%d%H%M%S')"
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.version.outputs.version }}
+        release_name: Release ${{ steps.version.outputs.version }}
+        body: This is a release of HBUT_auto_login_network
+        draft: true
+        prerelease: true
+
+    - name: Upload assets
+      id: upload-assets
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: |
+          main-linux-amd64
+          main-macos-amd64
+          main-macos-arm
+          main-windows-amd64.exe
+        asset_name: |
+          main-linux-amd64
+          main-macos-amd64
+          main-macos-arm
+          main-windows-amd64.exe
+        asset_content_type: application/octet-stream
