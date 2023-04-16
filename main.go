@@ -73,20 +73,22 @@ func debuff(action string) {
 			//osascript -e 'display notification "通知内容" with title "标题" subtitle "子标题"'
 			PrintRes("IP: "+ip, action, "success")
 			sysType := runtime.GOOS
-			if action == "login" && sysType == "darwin" {
-				cmd := exec.Command("osascript", "-e", "display notification \"IP: "+ip+"\" with title \"iHBUT_LOGIN\" subtitle \"Success\"")
-				out, err := cmd.CombinedOutput()
-				if err != nil {
-					fmt.Printf("combined out:\n%s\n", string(out))
-					log.Fatalf("cmd.Run() failed with %s\n", err)
+			if action == "login" {
+				if sysType == "darwin" {
+					cmd := exec.Command("osascript", "-e", "display notification \"IP: "+ip+"\" with title \"iHBUT_LOGIN\" subtitle \"SUCCESS\"")
+					out, err := cmd.CombinedOutput()
+					if err != nil {
+						fmt.Printf("combined out:\n%s\n", string(out))
+						log.Fatalf("cmd.Run() failed with %s\n", err)
+					}
 				}
-			}
-			if action == "login" && sysType == "linux" {
-				cmd := exec.Command("notify-send", "[SUCCESS]iHBUT Login", "IP: "+ip)
-				out, err := cmd.CombinedOutput()
-				if err != nil {
-					fmt.Printf("combined out:\n%s\n", string(out))
-					log.Fatalf("cmd.Run() failed with %s\n", err)
+				if sysType == "linux" {
+					cmd := exec.Command("notify-send", "[SUCCESS]iHBUT Login", "IP: "+ip)
+					out, err := cmd.CombinedOutput()
+					if err != nil {
+						fmt.Printf("combined out:\n%s\n", string(out))
+						log.Fatalf("cmd.Run() failed with %s\n", err)
+					}
 				}
 			}
 		}
