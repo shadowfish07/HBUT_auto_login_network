@@ -28,14 +28,14 @@ jobs:
     - name: Build for Linux
       run: env GOOS=linux GOARCH=amd64 go build -o main-linux-amd64 main.go
 
-    - name: Build for macOS(Intel)
-      run: env GOOS=darwin GOARCH=amd64 go build -o main-macos-amd64 main.go
-      
-    - name: Build for macOS(Apple)
-      run: env GOOS=darwin GOARCH=arm64 go build -o main-macos-arm64 main.go
-
-    - name: Build for Windows
-      run: env GOOS=windows GOARCH=amd64 go build -o main-windows-amd64.exe main-win.go
+#    - name: Build for macOS(Intel)
+#      run: env GOOS=darwin GOARCH=amd64 go build -o main-macos-amd64 main.go
+#
+#    - name: Build for macOS(Apple)
+#      run: env GOOS=darwin GOARCH=arm64 go build -o main-macos-arm64 main.go
+#
+#    - name: Build for Windows
+#      run: env GOOS=windows GOARCH=amd64 go build -o main-windows-amd64.exe main-win.go
 
     - name: Determine version number
       id: version
@@ -59,5 +59,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: my-artifact
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        name: artifacts
         path: ./main-*-*
