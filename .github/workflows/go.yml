@@ -35,7 +35,7 @@ jobs:
       run: env GOOS=darwin GOARCH=arm go build -o main-macos-arm main.go
 
     - name: Build for Windows
-      run: env GOOS=windows GOARCH=amd64 go build -o main-windows-amd64.exe main.go
+      run: env GOOS=windows GOARCH=amd64 go build -o main-windows-amd64.exe main-win.go
 
     - name: Determine version number
       id: version
