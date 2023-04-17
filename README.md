@@ -6,7 +6,7 @@
 
 ## 怎么使用？
 
-1. 下载最新Release中对应版本的可执行文件
+1. 下载[最新Release](https://github.com/lty2002/HBUT_auto_login_network/releases/tag/latest)中对应版本的可执行文件
     ```
     main-linux-amd64 (Linux)
     main-macos-amd64 (macOS-Intel)
