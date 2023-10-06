@@ -37,6 +37,12 @@ jobs:
     - name: Build for Windows
       run: env GOOS=windows GOARCH=amd64 go build -o main-windows-amd64.exe main-win.go
 
+    - name: Install gcc-mips-linux-gnu
+      run: apt-get install gcc-mips-linux-gnu
+
+    - name: Build for OpenWRT
+      run: env GOOS=linux GOARCH=mipsel CC=mipsel-linux-musl-gcc  go build -o main-openwrt-mipsel.exe main.go
+
     - name: Determine version number
       id: version
       run: echo "::set-output name=version::$(TZ=UTC-8 date +'%Y%m%d_%H%M%S')"
@@ -45,6 +51,5 @@ jobs:
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: true
-        automatic_release_tag: "latest"
         title: Release ${{ steps.version.outputs.version }}
         files: ./main-*-*
